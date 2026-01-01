@@ -1,0 +1,361 @@
+//              ▓▓▓▓  ▓▓▓▓  ▓▓██  ▓▓██                      
+//              ▓▓▒▒▓▓▒▒▒▒▓▓▒▒▒▒▓▓▒▒▓▓                      
+//              ▓▓▒▒▒▒▒▒░░░░░░▒▒▒▒▒▒▓▓                      
+//                ▓▓▒▒▒▒░░░░░░▒▒▒▒▓▓                        
+//                 ▓▓▒▒░░░░░░▒▒▓▓                          
+//                   ▓▓▒▒▒▒▒▒██   
+//                   ▓▓▓▓▓▓▓▓▓▓              
+//               ▓▓▓▓▒▒▒▒▒▒▒▒▒▒▓▓▓▓                              ████████ 
+//             ▓▓▒▒░░░░▒▒▒▒▒▒▒▒▒▒▒▒▓▓                           ██████████         
+//           ▓▓▒▒░░▒▒▒▒▒▒░░▒▒▒▒▒▒▒▒▒▒▓▓                        ██        ██                       
+//         ▓▓▒▒░░▒▒▒▒░░░░░░░░░░▒▒▒▒▒▒▒▒▓▓                      ██▄▄▄▄▄▄▄▄▄█         
+//       ▓▓▒▒░░▒▒▒▒░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▓▓                    ██▀███ ███▀█        
+//     ▓▓▒▒░░▒▒▒▒░░░░░░░░██░░░░░░░░▒▒▒▒▒▒▒▒▓▓    █             ▀█        █▀        
+//     ▓▓░░▒▒▒▒▒▒░░░░░░██████░░░░░░▒▒▒▒▒▒▒▒▓▓    ██                  █              
+//   ▓▓▒▒░░▒▒▒▒░░░░░░██░░░░░░██░░░░░░▒▒▒▒▒▒▒▒▓▓   █              ██     ██                                                                                  
+//   ▓▓░░▒▒▒▒▒▒░░░░░░██░░░░░░██░░░░░░▒▒▒▒▒▒▒▒▓▓ /█▄            ████─██──████                                                                                   
+// ▓▓▒▒░░▒▒▒▒░░░░░░░░░░██░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▓▓ ▄███████████████──██──██████                                                                                
+// ▓▓░░▒▒▒▒▒▒░░░░░░░░░░░░██░░░░░░░░░░░░▒▒▒▒▒▒▒▒▓▓    █████████████──██──█████████                                                                             
+// ▓▓░░▒▒▒▒▒▒░░░░░░░░░░░░░░██░░░░░░░░░░▒▒▒▒▒▒▒▒▓▓             ████──██─█████  ███                                                                              
+// ▓▓▒▒▒▒▒▒▒▒░░░░░░░░██░░░░░░██░░░░░░░░▒▒▒▒▒▒▒▒▓▓              ███──██─█████  ███                                                                             
+// ▓▓▒▒▒▒▒▒▒▒░░░░░░░░██░░░░░░██░░░░░░░░▒▒▒▒▒▒▒▒▓▓              ███─────█████████                                                                           
+//   ▓▓▒▒▒▒▒▒▒▒░░░░░░░░██████░░░░░░░░▒▒▒▒▒▒▒▒▓▓                ██─────████████▀                                                                            
+//   ▓▓▒▒▒▒▒▒▒▒░░░░░░░░░░██░░░░░░░░░░▒▒▒▒▒▒▒▒▓▓                  ██████████                                                                                 
+//    ▓▓▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▓▓                   ██████████                                                                                
+//    ▓▓▒▒▒▒▒▒▒▒░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▓▓                     ████████                                                                               
+//    ▓▓▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▓▓                      ██████████▄▄                                                                        
+//    ▓▓▒▒▒▒▒▒▒▒▒▒▒▒░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒▒▒▓▓                      █████████▀                                                                           
+//      ▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓                           ███   ███                                                                          
+//        ▓▓▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓▓                             ███   ███                                                                                 
+//            ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓                                ██████   ▀                                                                                   
+//             ▓▓░░░░░░▓▓░░░░░░░░▓▓░░                               ▀▄▄▄▄▀                                                                          
+//                             
+// ██╗    ██╗███████╗██╗      ██████╗ ████████╗██████╗  █████╗ ██████╗ ███████╗███████╗ 
+// ██║    ██║██╔════╝██║     ██╔═══██╗╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝ 
+// ██║ █╗ ██║█████╗  ██║     ██║   ██║   ██║   ██████╔╝███████║██║  ██║█████╗  ███████╗ 
+// ██║███╗██║██╔══╝  ██║     ██║   ██║   ██║   ██╔══██╗██╔══██║██║  ██║██╔══╝  ╚════██║ 
+// ╚███╔███╔╝███████╗███████╗╚██████╔╝   ██║   ██║  ██║██║  ██║██████╔╝███████╗███████║ 
+//  ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝ 
+
+// This Pine Script™ code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © WeloTrades
+
+//@version=5
+indicator(title="Market Cipher B by WeloTrades", shorttitle="MCB {WeloTrades}", overlay=false, max_bars_back=5000, max_lines_count=500, max_boxes_count=500, max_labels_count=500)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////      INPUTS      ///////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Display Settings //
+showWMCBlvl         = input(true, title='👀 WT OB & OS', group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings2", tooltip="Display WaveTrend Overbought and Oversold levels")
+showWTChannel       = input(true, title='👀 WT Channel', group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings3", tooltip="Display the WaveTrend channel")
+showWTDifference    = input(false, title='👀 WT Difference', group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings6", tooltip="Display the difference between the WaveTrend channels")
+showmoneyFlowFast   = input(true, title='👀 Fast MoneyFlow', group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings4", tooltip="Display the fast Money Flow indicator")
+showmoneyFlowSlow   = input(true, title='👀 Slow MoneyFlow', group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings5", tooltip="Display the slow Money Flow indicator")
+showWRSIlvl         = input(false, title='👀 RSI', group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings7", tooltip="Display the Relative Strength Index (RSI)")
+showStochasticRSI   = input(false, title='👀 Stochastic RSI', group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings8", tooltip="Display the Stochastic RSI indicator")
+showMajorDivergence = input(true, title='👀 Potential Top & Bottom', group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings1", tooltip="Display potential tops and bottoms based on divergences")
+topSymbol           = input.string("💥", title="", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings1", options=["💥", "🔺", "🔻", "⛔", "❌"])
+bottomSymbol        = input.string("💥", title="", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Display Settings1", options=["💥", "🔺", "🔻", "✅", "✔️"], tooltip="Display Symbol for potential tops / Symbol for potential bottoms")
+showCross           = input.bool(true, title='👀 WT Cross Circles', group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Cross Settings")
+crossSymbolStyle    = input.string("shape_circle", title="", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Cross Settings", options=["shape_arrow_up", "shape_arrow_down", "shape_circle", "shape_cross", "shape_diamond", "shape_flag", "shape_label_up", "shape_label_down", "shape_square", "shape_triangle_up", "shape_triangle_down"])
+bullishCrossColor   = input.color(color.rgb(0, 255, 8), title="", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Cross Settings")
+bearishCrossColor   = input.color(color.rgb(255, 0, 0), title="", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Cross Settings", tooltip="Display WaveTrend cross circles / Style of the cross symbol / Color for bullish cross / Color for bearish cross")
+showBull            = input.bool(true, title="👀 Regular Bullish Div", group = "+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Bull")
+bullSymbol          = input.string("🐮", title="", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Bull", options=["🐮", "🟢", "⬆️", "✔️"], tooltip="Display regular bullish divergences / Symbol for regular bullish divergences")
+showBear            = input.bool(true, title="👀 Regular Bearish Div", group = "+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Bear")
+bearSymbol          = input.string("🐻", title="", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Bear", options=["🐻", "🔴", "⬇️", "❌"], tooltip="Display regular bearish divergences / Symbol for regular bearish divergences")
+showHiddenBull      = input.bool(false, title="👀 Hidden Bullish Div", group = "+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="HiddenBull")
+hiddenBullSymbol    = input.string("🔎", title="", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="HiddenBull", options=["🔎", "🟢", "⬆️", "✔️"], tooltip="Display hidden bullish divergences / Symbol for hidden bullish divergences")
+showHiddenBear      = input.bool(false, title="👀 Hidden Bearish Div", group = "+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="HiddenBear")
+hiddenBearSymbol    = input.string("🔍", title="", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="HiddenBear", options=["🔍", "🔴", "⬇️", "❌"], tooltip="Display hidden bearish divergences / Symbol for hidden bearish divergences")
+textColor           = input.color(color.rgb(255, 255, 255), title="🎨 Text Color", group="+++++++++++++ DISPLAY SETTINGS +++++++++++++", inline="Text", tooltip="Color for text display")
+bearColor           = color.rgb(255, 0, 0)
+bullColor           = color.rgb(0, 255, 8)
+hiddenBullColor     = color.rgb(0, 255, 8)
+hiddenBearColor     = color.rgb(255, 0, 0)
+noneColor           = color.rgb(255, 255, 255, 100)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Wave Trend Channel Settings //
+ap                 = input(close, title="🔍 Source", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel1", tooltip="Source for the WaveTrend calculation")
+n1                 = input(9, "📏 WT Channel Length", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel2")
+waveTrendColor1    = input.color(color.rgb(0, 255, 235), title="", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel2")
+waveTrendWidth1    = input.int(1, title="Width", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel2", tooltip="Length of the WaveTrend channel / Color of the first WaveTrend channel / Width of the first WaveTrend channel")
+n2                 = input(21, "📏 WT Channel Average L", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel2_")
+waveTrendColor2    = input.color(color.rgb(0, 65, 255), title="", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel2_")
+waveTrendWidth2    = input.int(1, title="Width", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel2_", tooltip="Length of the WaveTrend channel average / Color of the second WaveTrend channel / Width of the second WaveTrend channel")
+waveTrendDiffColor = input.color(color.rgb(255, 230, 0), title="🎨 WT Difference Color", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel_2", tooltip="Color of the difference between the WaveTrend channels")
+MCBobLevel1        = input(60, "📈📉 WT OB 1 & 2", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel3")
+MCBobLevel2        = input(53, "", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel3", tooltip="Overbought level 1 for WaveTrend / Overbought level 2 for WaveTrend")
+mcbOBColor1        = input.color(color.rgb(255, 0, 0), title="🎨 WT OB 1 & 2 Style", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel3_")
+mcbOBColor1_       = input.color(color.rgb(255, 0, 0), title="", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel3_")
+mcbLineWidth1_2    = input.int(2, title="Width", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel3_", tooltip="Color style for WaveTrend overbought levels / Line width for WaveTrend overbought levels")
+MCBosLevel1        = input(-60, "📈📉 WT OS 1 & 2", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel4")
+MCBosLevel2        = input(-53, "", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel4", tooltip="Oversold level 1 for WaveTrend / Oversold level 2 for WaveTrend")
+mcbOSColor2        = input.color(color.rgb(0, 255, 8), title="🎨 WT OS 1 & 2 Style", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel4_")
+mcbOSColor2_       = input.color(color.rgb(0, 255, 8), title="", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel4_")
+mcbLineWidth1_2_   = input.int(2, title="Width", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel4_", tooltip="Color style for WaveTrend oversold levels / Line width for WaveTrend oversold levels")
+wtDivergenceLength = input(28, "⏲ MCB Potential Top / Bottom 💥 Range", group="+++++++++++++ WAVE TREND CHANNEL SETTINGS +++++++++++++", inline="WaveTrend Channel6", tooltip="Lookback range for potential tops and bottoms")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Regular & Hidden Divergences settings //
+lbL        = input.int(10, title="↔ Pivot Lookback Left / Right", group="++++++++ 🐮/🔎 DIVERGENCE SETTINGS 🐻/🔍 ++++++++", inline='DIV1')
+lbR        = input.int(10, "", group="++++++++ 🐮/🔎 DIVERGENCE SETTINGS 🐻/🔍 ++++++++", inline='DIV1', tooltip="Lookback period to the left & right for pivots")
+rangeLower = input.int(10, title="➖➕ Min / Max Lookback Range", group="++++++++ 🐮/🔎 DIVERGENCE SETTINGS 🐻/🔍 ++++++++", inline='DIV2')
+rangeUpper = input.int(100, title="", group="++++++++ 🐮/🔎 DIVERGENCE SETTINGS 🐻/🔍 ++++++++", inline='DIV2', tooltip="Minimum & Maximum lookback range")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Fast Money Flow settings //
+moneyFlowPeriod       = input.int(9, "📏 Fast Money Flow Length", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", minval=1, inline="Money Flow1")
+fastMoneyFlowColor    = input.color(color.rgb(0, 255, 0, 35), title="", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", inline="Money Flow1")
+fastMoneyFlowNegColor = input.color(color.rgb(255, 0, 0, 35), "", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", inline="Money Flow1", tooltip="Length of the fast Money Flow period / Color for positive & negative fast Money Flow")
+moneyFlowMultiplier   = input.float(5, title="↕↔ Multiplier / Y Position", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", minval=0.1, maxval=1000.0, step=0.1, inline="Money Flow2")
+moneyFlowYPos         = input.int(0, "", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", minval=-100, maxval=+100, inline="Money Flow2", tooltip="Multiplier and Y position for fast Money Flow / Y position adjustment for fast Money Flow")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Slow Money Flow settings //
+moneyFlowPeriodSlow     = input.int(10, "📏 Slow Money Flow Length", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", minval=1, inline="Money Flow3")
+slowMoneyFlowColor      = input.color(color.rgb(0, 255, 0, 45), title="", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", inline="Money Flow3")
+slowMoneyFlowNegColor   = input.color(color.rgb(255, 0, 0, 45), "", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", inline="Money Flow3", tooltip="Length of the slow Money Flow period / Color for positive & negative slow Money Flow")
+moneyFlowMultiplierSlow = input.float(5, title="↕↔ Multiplier / Y Position", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", minval=0.1, maxval=1000.0, step=0.1, inline="Money Flow4")
+moneyFlowYPosSlow       = input.int(0, "", group="+++++++++++++ MONEY FLOW SETTINGS +++++++++++++", minval=-100, maxval=+100, inline="Money Flow4", tooltip="Multiplier and Y position for slow Money Flow / Y position adjustment for slow Money Flow")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// RSI Oversold & Overbought Settings //
+rsiLength         = input(14, "📏 RSI Length / Smooth", group="++++++++ RSI OVERSOLD & OVERBOUGHT SETTINGS ++++++++", inline="RSI Settings1")
+rsiSmoothLength   = input(5, "", group="++++++++ RSI OVERSOLD & OVERBOUGHT SETTINGS ++++++++", inline="RSI Settings1")
+rsiLineColor      = input.color(color.rgb(212, 243, 33), title="", group="++++++++ RSI OVERSOLD & OVERBOUGHT SETTINGS ++++++++", inline="RSI Settings1")
+rsiSmoothColor    = input.color(color.rgb(0, 255, 234), title="", group="++++++++ RSI OVERSOLD & OVERBOUGHT SETTINGS ++++++++", inline="RSI Settings1", tooltip="Length and smoothing period for RSI / Color for RSI line & smoothed RSI line")
+obLevel0          = input(70, "📈📉OB / OS Level 1", group="++++++++ RSI OVERSOLD & OVERBOUGHT SETTINGS ++++++++", inline="RSI Settings2")
+osLevel0          = input(30, "", group="++++++++ RSI OVERSOLD & OVERBOUGHT SETTINGS ++++++++", inline="RSI Settings2", tooltip="Overbought and oversold level 1 for RSI")
+rsiOBColor0       = input.color(color.rgb(255, 0, 0, 50), title="🎨 OB / OS Level 1 Style", group="++++++++ RSI OVERSOLD & OVERBOUGHT SETTINGS ++++++++", inline="RSI Settings2_")
+rsiOSColor0       = input.color(color.rgb(0, 255, 8, 50), title="", group="++++++++ RSI OVERSOLD & OVERBOUGHT SETTINGS ++++++++", inline="RSI Settings2_")
+rsiOBOSLineWidth0 = input.int(1, title="Width", group="++++++++ RSI OVERSOLD & OVERBOUGHT SETTINGS ++++++++", inline="RSI Settings2_", tooltip="Color style for overbought & oversold level 1 / Line width for overbought and oversold levels")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Stochastic RSI Settings //
+stochLength            = input(14, "📏 Stoch RSI Length", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI1", tooltip="Length for Stochastic RSI")
+stochSmoothK           = input(21, "📏 Stoch %K / %D", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI2")
+stochSmoothD           = input(9, "", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI2")
+stochKColor            = input.color(color.rgb(247, 0, 255), title="", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI2")
+stochDColor            = input.color(color.rgb(33, 149, 243), "", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI2", tooltip="Smoothing period for %K and %D in Stochastic RSI / Color for %K & %D in Stochastic RSI")
+stochSmoothKAdditional = input(3, "📏 Add %K / %D", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI3")
+stochSmoothDAdditional = input(3, "", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI3")
+stochKAddColor         = input.color(color.rgb(247, 0, 255, 25), title="", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI3")
+stochDAddColor         = input.color(color.rgb(33, 149, 243, 25), "", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI3", tooltip="Additional smoothing period for %K and %D / Color for additional %K & %D in Stochastic RSI")
+STOCHobLevel1          = input(80, "📈📉 Stoch OB / OS Level", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI4")
+STOCHosLevel2          = input(20, "", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI4", tooltip="Overbought & Oversold level for Stochastic RSI")
+stochOBColor           = input.color(color.rgb(255, 0, 0, 50), title="🎨 Stoch OB / OS Style", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI4_")
+stochOSColor           = input.color(color.rgb(0, 255, 8, 50), title="", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI4_")
+stochOBOSLineWidth     = input.int(1, title="Width", group="+++++++++++++ STOCHASTIC RSI SETTINGS +++++++++++++", inline="Stochastic RSI4_", tooltip="Color style for overbought & oversold level in Stochastic RSI / Line width for overbought and oversold levels in Stochastic RSI")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////      calculations      /////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Calculation CHANNEL //
+esa = ta.ema(ap, n1)
+d   = ta.ema(math.abs(ap - esa), n1)
+ci  = (ap - esa) / (0.015 * d)
+tci = ta.ema(ci, n2 )
+wt1 = tci
+wt2 = ta.sma(wt1, 2)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Fast Money Flow Calculation //
+rawMoneyFlow = (2 * ta.sma(hlc3 - ta.sma(hlc3, moneyFlowPeriod), moneyFlowPeriod)) / ta.sma(high - low, moneyFlowPeriod)
+moneyFlow    = rawMoneyFlow * moneyFlowMultiplier
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Slow Money Flow Calculation //
+rawMoneyFlowSlow = (2 * ta.sma(hlc3 - ta.sma(hlc3, moneyFlowPeriodSlow), moneyFlowPeriodSlow)) / ta.sma(high - low, moneyFlowPeriodSlow)
+moneyFlowSlow    = rawMoneyFlowSlow * moneyFlowMultiplierSlow
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Bullish and Bearish Cross Calculation //
+bullishCross = ta.cross(wt1, wt2) and wt2 > wt1 ? wt2 : na
+bearishCross = ta.cross(wt1, wt2) and wt2 < wt1 ? wt2 : na
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TOP & BOTTOM detection for WaveTrend //
+wt1_peak            = ta.highest(wt1, wtDivergenceLength)
+wt1_trough          = ta.lowest(wt1, wtDivergenceLength)
+bullishWTDivergence = ta.crossover(wt1, wt1_trough) and ta.crossover(close, ta.lowest(close, wtDivergenceLength))
+bearishWTDivergence = ta.crossunder(wt1, wt1_peak) and ta.crossunder(close, ta.highest(close, wtDivergenceLength))
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Regular & Hidden Divergences Calculation //
+normalize(value, max_val) =>
+    value > max_val ? max_val : value < -max_val ? -max_val : value
+
+fast_ma     = ta.sma(ap, n1)
+slow_ma     = ta.sma(ap, n2)
+macd        = ((fast_ma - slow_ma) / slow_ma)
+signal      = ta.sma(macd, n2)
+hist        = macd - signal
+hist_change = ta.change(hist)
+macd_change = ta.change(macd)
+osc         = macd
+plFound     = ta.pivotlow(osc, lbL, lbR)
+phFound     = ta.pivothigh(osc, lbL, lbR)
+
+_inRange(cond) =>
+    bars = ta.barssince(cond)
+    rangeLower <= bars and bars <= rangeUpper
+
+// Regular Bullish
+oscValueWhen   = ta.valuewhen(bool(plFound), osc[lbR], 1)
+oscHL          = osc[lbR] > oscValueWhen and _inRange(plFound[1]) and osc[lbR] < 0
+priceValueWhen = ta.valuewhen(bool(plFound), low[lbR], 1)
+priceLL        = low[lbR] < priceValueWhen
+priceHHZero    = ta.highest(osc, lbL + lbR + 5) 
+bullCond       = showBull and priceLL and oscHL and plFound 
+
+// Hidden Bullish
+oscValueWhenHL   = ta.valuewhen(bool(plFound), osc[lbR], 1)
+oscLL            = osc[lbR] < oscValueWhenHL and _inRange(plFound[1])
+priceValueWhenHL = ta.valuewhen(bool(plFound), low[lbR], 1)
+priceHL          = low[lbR] > priceValueWhenHL
+hiddenBullCond   = showHiddenBull and priceHL and oscLL and plFound
+
+// Regular Bearish
+oscValueWhenLH   = ta.valuewhen(bool(phFound), osc[lbR], 1)
+oscLH            = osc[lbR] < oscValueWhenLH and _inRange(phFound[1]) and osc[lbR]> 0
+priceLLZero      = ta.lowest(osc, lbL + lbR + 5) 
+priceValueWhenHH = ta.valuewhen(bool(phFound), high[lbR], 1)
+priceHH          = high[lbR] > priceValueWhenHH
+bearCond         = showBear and priceHH and oscLH and phFound 
+
+// Hidden Bearish
+oscValueWhenHH   = ta.valuewhen(bool(phFound), osc[lbR], 1)
+oscHH            = osc[lbR] > oscValueWhenHH and _inRange(phFound[1])
+priceValueWhenLH = ta.valuewhen(bool(phFound), high[lbR], 1)
+priceLH          = high[lbR] < priceValueWhenLH
+hiddenBearCond   = showHiddenBear and priceLH and oscHH and phFound
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// RSI Calculation //
+rsi         = ta.rsi(close, rsiLength)
+smoothedRsi = ta.sma(rsi, rsiSmoothLength)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Stochastic RSI Calculation //
+stoch_rsi         = ta.stoch(rsi, rsi, rsi, stochLength)
+smoothK           = ta.sma(stoch_rsi, stochSmoothK)
+smoothD           = ta.sma(smoothK, stochSmoothD)
+additionalSmoothK = ta.sma(smoothK, stochSmoothKAdditional)
+additionalSmoothD = ta.sma(smoothD, stochSmoothDAdditional)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////      PLOTS      ////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// WaveTrend 1 & 2 Plots //
+wt1_plot = showWTChannel ? wt1 : na
+wt2_plot = showWTChannel ? wt2 : na
+wt_diff_plot = showWTDifference ? wt1 - wt2 : na
+plot(wt1_plot, style=plot.style_area, color=waveTrendColor1, linewidth=waveTrendWidth1, title="WaveTrend1")
+plot(wt2_plot, style=plot.style_area, color=waveTrendColor2, linewidth=waveTrendWidth2, title="WaveTrend2")
+plot(wt_diff_plot, style=plot.style_area, color=waveTrendDiffColor, linewidth=waveTrendWidth1, title="WaveTrends Difference")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// MoneyFlow Plots //
+moneyFlowColor = moneyFlow > 0 ? fastMoneyFlowColor : fastMoneyFlowNegColor
+plot(moneyFlow, color=showmoneyFlowFast ? moneyFlowColor : na, style=plot.style_area, linewidth=1, offset=moneyFlowYPos, title="Fast Money Flow")
+moneyFlowColorSlow = moneyFlowSlow > 0 ? slowMoneyFlowColor : slowMoneyFlowNegColor
+plot(moneyFlowSlow, color=showmoneyFlowSlow ? moneyFlowColorSlow : na, style=plot.style_area, linewidth=1, offset=moneyFlowYPosSlow, title="Slow Money Flow")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// MCB ob & os Level Plots //
+plot(showWMCBlvl ? MCBobLevel1 : na, color=mcbOBColor1, linewidth=mcbLineWidth1_2, title="MCB OB Level 1")
+plot(showWMCBlvl ? MCBobLevel2 : na, color=mcbOBColor1, linewidth=mcbLineWidth1_2, title="MCB OB Level 2")
+plot(showWMCBlvl ? MCBosLevel1 : na, color=mcbOSColor2_, linewidth=mcbLineWidth1_2_, title="MCB OS Level 1")
+plot(showWMCBlvl ? MCBosLevel2 : na, color=mcbOSColor2_, linewidth=mcbLineWidth1_2_, title="MCB OS Level 2")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// RSI Plots //
+plot(showWRSIlvl ? rsi : na, color=rsiLineColor, linewidth=2, style=plot.style_line, title="RSI Line")
+plot(showWRSIlvl ? smoothedRsi : na, color=rsiSmoothColor, linewidth=2, style=plot.style_line, title="RSI Smoothed Line")
+plot(showWRSIlvl ? obLevel0 : na, color=rsiOBColor0, linewidth=rsiOBOSLineWidth0, style=plot.style_circles, title="RSI OB/OS Level 1")
+plot(showWRSIlvl ? osLevel0 : na, color=rsiOSColor0, linewidth=rsiOBOSLineWidth0, style=plot.style_circles, title="RSI OB/OS Level 1")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Stochastic RSI Plots //
+plot(showStochasticRSI ? smoothK : na, color=stochKColor, linewidth=2, style=plot.style_line, title="Stochastic RSI %K")
+plot(showStochasticRSI ? smoothD : na, color=stochDColor, linewidth=2, style=plot.style_line, title="Stochastic RSI %D")
+plot(showStochasticRSI ? additionalSmoothK : na, color=stochKAddColor, linewidth=2, style=plot.style_line, title="Stochastic RSI Additional %K")
+plot(showStochasticRSI ? additionalSmoothD : na, color=stochDAddColor, linewidth=2, style=plot.style_line, title="Stochastic RSI Additional %D")
+plot(showStochasticRSI ? STOCHobLevel1 : na, color=stochOBColor, linewidth=stochOBOSLineWidth, style=plot.style_circles, title="Stochastic RSI OB Level")
+plot(showStochasticRSI ? STOCHosLevel2 : na, color=stochOSColor, linewidth=stochOBOSLineWidth, style=plot.style_circles, title="Stochastic RSI OS Level")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Plot bullish and bearish divergences for WaveTrend //
+plotchar(series=bullishWTDivergence and showMajorDivergence, location=location.bottom, color=color.rgb(0, 255, 8), size=size.tiny, text="Bottom", textcolor=textColor, title="Potential TOP", char=bottomSymbol)
+plotchar(series=bearishWTDivergence and showMajorDivergence, location=location.top, color=color.rgb(255, 0, 0), size= size.tiny , text="Top", textcolor=textColor, title="Potential BOTTOM", char=topSymbol)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Bullish and Bearish Cross Plots //
+plotshape(series=bool(bullishCross) and showCross ? bullishCross : na, location=location.absolute, color=bearishCrossColor, style=crossSymbolStyle, title="Bullish WT Cross", size=size.tiny)
+plotshape(series=bool(bearishCross) and showCross ? bearishCross : na, location=location.absolute, color=bullishCrossColor, style=crossSymbolStyle, title="Bearish WT Cross", size=size.tiny)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Regular & Hidden divergences //
+plotchar(bullCond ? osc[lbR] : na, offset=-lbR, location=location.bottom, color=bullColor, textcolor=textColor, size=size.tiny, title="Regular Bullish Label", text=" Bull ", char=bullSymbol)
+plotchar(hiddenBullCond ? osc[lbR] : na, offset=-lbR, location=location.bottom, color=hiddenBullColor, textcolor=textColor, size=size.tiny, title="Hidden Bullish Label", text=" H Bull ", char=hiddenBullSymbol)
+plotchar(bearCond ? osc[lbR] : na, offset=-lbR, location=location.top, color=bearColor, textcolor=textColor, size=size.tiny, title="Regular Bearish Label", text=" Bear ", char=bearSymbol)
+plotchar(hiddenBearCond ? osc[lbR] : na, offset=-lbR, location=location.top, color=hiddenBearColor, textcolor=textColor, size=size.tiny, title="Hidden Bearish Label", text=" H Bear ", char=hiddenBearSymbol)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////      ALERTS      //////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Alerts for OB and OS levels for WaveTrend, RSI, Stoch RSI
+alertcondition(wt1 >= MCBobLevel1 or wt1 >= MCBobLevel2, title="WaveTrend Overbought", message="{{ticker}} ({{interval}}) WaveTrend is Overbought in Market Cipher B by WeloTrades")
+alertcondition(wt1 <= MCBosLevel1 or wt1 <= MCBosLevel2, title="WaveTrend Oversold", message="{{ticker}} ({{interval}}) WaveTrend is Oversold in Market Cipher B by WeloTrades")
+
+// Alerts for Potential Top/Bottom when the candle closes and the top/bottom signal is made
+alertcondition(bullishWTDivergence and close, title="💥 Potential WaveTrend Bottom", message="{{ticker}} ({{interval}}) 💥 Potential WaveTrend Bottom Detected in Market Cipher B by WeloTrades")
+alertcondition(bearishWTDivergence and close, title="💥 Potential WaveTrend Top", message="{{ticker}} ({{interval}}) 💥 Potential WaveTrend Top Detected in Market Cipher B by WeloTrades")
+
+// Alert for Regular Bullish Divergence //
+alertcondition(bullCond, title="🐮 Regular Bullish Divergence", message="{{ticker}} ({{interval}}) 🐮 Regular Bullish Divergence detected in Market Cipher B by WeloTrades")
+
+// Alert for Hidden Bullish Divergence //
+alertcondition(hiddenBullCond, title="🔎 Hidden Bullish Divergence", message="{{ticker}} ({{interval}}) 🔎 Hidden Bullish Divergence detected in Market Cipher B by WeloTrades")
+
+// Alert for Regular Bearish Divergence //
+alertcondition(bearCond, title="🐻 Regular Bearish Divergence", message="{{ticker}} ({{interval}}) 🐻 Regular Bearish Divergence detected in Market Cipher B by WeloTrades")
+
+// Alert for Hidden Bearish Divergence //
+alertcondition(hiddenBearCond, title="🔍 Hidden Bearish Divergence", message="{{ticker}} ({{interval}}) 🔍 Hidden Bearish Divergence detected in Market Cipher B by WeloTrades")
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
