@@ -219,11 +219,19 @@ def yfinance_verify(signal):
             print(f"No data for {FOREX_PAIR}. yfinance may be delayed.")
             return False
         
+        # yfinance 1.0+ returns multi-level columns; flatten them
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+        
         df = df.dropna()
         
-        df['MFI'] = ta.MFI(df['High'].values, df['Low'].values, df['Close'].values, 
-                           df['Volume'].values if 'Volume' in df.columns else np.ones(len(df)), 
-                           timeperiod=14)
+        # Ensure arrays are float64 for TA-Lib
+        high = df['High'].values.astype('float64')
+        low = df['Low'].values.astype('float64')
+        close = df['Close'].values.astype('float64')
+        volume = df['Volume'].values.astype('float64') if 'Volume' in df.columns else np.ones(len(df), dtype='float64')
+        
+        df['MFI'] = ta.MFI(high, low, close, volume, timeperiod=14)
         
         from scipy.signal import argrelextrema
         lows_idx = argrelextrema(df['Low'].values, np.less, order=3)[0]
@@ -247,9 +255,9 @@ def yfinance_verify(signal):
                           recent_highs_mfi.iloc[-1] < recent_highs_mfi.iloc[-2])
         
         df['Body'] = np.abs(df['Close'] - df['Open'])
-        atr = ta.ATR(df['High'].values, df['Low'].values, df['Close'].values, 14)
+        atr = ta.ATR(high, low, close, 14)
         recent_bodies = df['Body'].tail(10)
-        large_candle = recent_bodies.max() > atr.iloc[-1] * 1.5 if len(atr) > 0 else False
+        large_candle = recent_bodies.max() > atr[-1] * 1.5 if len(atr) > 0 and not np.isnan(atr[-1]) else False
         
         verified = False
         if signal == 'green' and (bullish_div or large_candle):
