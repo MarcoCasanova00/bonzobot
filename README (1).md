@@ -17,7 +17,17 @@ Automated screen-based trading bot for 1-minute forex scalping using Market Ciph
 - **OS**: Arch Linux
 - **Python**: 3.10+
 - **Display**: Single screen, 1920x1080 minimum recommended
-- **Broker**: Web-based (TradingView charts on browser)
+- **Broker**: Web-based (TradingView or Trading 212)
+
+## Trading 212 Setup
+
+If you are using Trading 212 instead of TradingView:
+
+1. **No Market Cipher B**: Trading 212 doesn't have custom indicators like Market Cipher B. You'll need to modify the bot to detect different signals or use TradingView for signals alongside Trading 212 for execution.
+2. **Button Names**: The "COMPRA" and "VENDI" buttons are the Buy/Sell buttons.
+3. **Dot Indicator**: For the "indicator dots" step, if you don't have a dot-based indicator visible, you can point to any area of the chart you want the bot to monitor. However, **the bot will not execute trades** unless it detects green/red dots matching its HSV thresholds.
+
+> **Tip**: For best results, run TradingView with Market Cipher B for signal detection and Trading 212 for order execution side-by-side.
 
 ## Installation
 

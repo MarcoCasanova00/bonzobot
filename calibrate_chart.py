@@ -1,173 +1,140 @@
 import pyautogui
 import json
 import os
+import cv2
+import numpy as np
 from datetime import datetime
+from PIL import Image, ImageDraw
 
-print("="*80)
-print("CHART COORDINATE CALIBRATION - AUTO-EXPORT (ARCH LINUX)")
-print("="*80)
-print()
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-print("STEP 1: Detecting screen layout...")
+def get_input(prompt):
+    print(f"\n>>> {prompt}")
+    return input("Press ENTER when ready...")
+
+clear_screen()
+print("="*80)
+print("       BONZOBOT - SMART CHART CALIBRATION (TRADING 212 & TRADINGVIEW)")
+print("="*80)
+print("\nThis script will help you set the coordinates for the bot to 'see' your chart.")
+print("Make sure your browser with the chart is visible on your screen.")
+
+print("\nSTEP 1: Detecting screen layout...")
 total_size = pyautogui.size()
-print(f"Total screen size: {total_size}")
-print()
+print(f"✓ Total screen size detected: {total_size}")
 
-# Calibrate chart
+# --- CHART REGION ---
+print("\n" + "="*80)
+print("STEP 2: CALIBRATE MAIN CHART AREA")
 print("="*80)
-print("STEP 2: Calibrate chart coordinates")
-print("="*80)
-print()
+print("The bot needs to see the price action to detect divergences and zones.")
 
-input("Move to TOP-LEFT corner of chart window, then press ENTER: ")
+get_input("Move your mouse to the TOP-LEFT corner of the actual PRICE CHART area.")
 chart_tl = pyautogui.position()
-print(f"  Top-left: {chart_tl}")
+print(f"  Captured Top-left: {chart_tl}")
 
-input("Move to BOTTOM-RIGHT corner of chart window, then press ENTER: ")
+get_input("Move your mouse to the BOTTOM-RIGHT corner of the PRICE CHART area.")
 chart_br = pyautogui.position()
-print(f"  Bottom-right: {chart_br}")
+print(f"  Captured Bottom-right: {chart_br}")
 
 chart_x = min(chart_tl[0], chart_br[0])
 chart_y = min(chart_tl[1], chart_br[1])
 chart_w = abs(chart_br[0] - chart_tl[0])
 chart_h = abs(chart_br[1] - chart_tl[1])
 
-print()
-print("Chart coordinates detected:")
-print(f"  CHART_X = {chart_x}")
-print(f"  CHART_Y = {chart_y}")
-print(f"  CHART_W = {chart_w}")
-print(f"  CHART_H = {chart_h}")
-print()
-
-# Indicator region
+# --- INDICATOR REGION ---
+print("\n" + "="*80)
+print("STEP 3: CALIBRATE INDICATOR (MARKET CIPHER DOTS)")
 print("="*80)
-print("STEP 3: Calibrate indicator region (Market Cipher dots)")
-print("="*80)
-print()
+print("The bot looks for GREEN and RED dots on your indicator (e.g., Market Cipher B).")
+print("If you don't have an indicator with dots, the bot will not work!")
 
-input("Move to CENTER of indicator dots area, then press ENTER: ")
+get_input("Move your mouse to the CENTER of where the GREEN/RED DOTS appear.")
 indicator_center = pyautogui.position()
-print(f"  Center: {indicator_center}")
+print(f"  Captured Indicator Center: {indicator_center}")
 
+# Define a 150x150 box around the center
 ind_x = indicator_center[0] - 75
 ind_y = indicator_center[1] - 75
 ind_w = 150
 ind_h = 150
 
-print(f"Indicator region: ({ind_x}, {ind_y}, {ind_w}, {ind_h})")
-print()
-
-# Buy button
+# --- BUTTONS ---
+print("\n" + "="*80)
+print("STEP 4: CALIBRATE TRADING BUTTONS")
 print("="*80)
-print("STEP 4: Calibrate Buy button")
-print("="*80)
-print()
+print("On Trading 212, these are the 'COMPRA' (Buy) and 'VENDI' (Sell) buttons.")
 
-input("Move to center of BUY button, then press ENTER: ")
+get_input("Move your mouse to the center of the BUY (COMPRA) button.")
 buy_pos = pyautogui.position()
-print(f"  BUY_BUTTON = {buy_pos}")
-print()
+print(f"  Captured BUY_BUTTON: {buy_pos}")
 
-# Sell button
-print("="*80)
-print("STEP 5: Calibrate Sell button")
-print("="*80)
-print()
-
-input("Move to center of SELL button, then press ENTER: ")
+get_input("Move your mouse to the center of the SELL (VENDI) button.")
 sell_pos = pyautogui.position()
-print(f"  SELL_BUTTON = {sell_pos}")
-print()
+print(f"  Captured SELL_BUTTON: {sell_pos}")
 
-# Create configuration dictionary
+# --- PREVIEW GENERATION ---
+print("\n" + "="*80)
+print("STEP 5: GENERATING VISUAL PREVIEW")
+print("="*80)
+print("Capturing your screen to verify the coordinates...")
+
+try:
+    # Capture full screen for preview
+    full_screen = pyautogui.screenshot()
+    preview_img = full_screen.copy()
+    draw = ImageDraw.Draw(preview_img)
+    
+    # Draw Chart Region (Blue)
+    draw.rectangle([chart_x, chart_y, chart_x + chart_w, chart_y + chart_h], outline="blue", width=5)
+    draw.text((chart_x + 10, chart_y + 10), "CHART AREA", fill="blue")
+    
+    # Draw Indicator Region (Green)
+    draw.rectangle([ind_x, ind_y, ind_x + ind_w, ind_y + ind_h], outline="green", width=5)
+    draw.text((ind_x + 10, ind_y + 10), "DOTS INDICATOR", fill="green")
+    
+    # Draw Buttons (Red)
+    draw.ellipse([buy_pos[0]-10, buy_pos[1]-10, buy_pos[0]+10, buy_pos[1]+10], outline="red", width=3)
+    draw.text((buy_pos[0] + 15, buy_pos[1]), "BUY", fill="red")
+    
+    draw.ellipse([sell_pos[0]-10, sell_pos[1]-10, sell_pos[0]+10, sell_pos[1]+10], outline="red", width=3)
+    draw.text((sell_pos[0] + 15, sell_pos[1]), "SELL", fill="red")
+    
+    preview_path = "calibration_preview.png"
+    preview_img.save(preview_path)
+    print(f"✓ Preview saved to: {preview_path}")
+    print("  PLEASE OPEN THIS IMAGE AND VERIFY THE BOXES ARE CORRECT!")
+except Exception as e:
+    print(f"✗ Failed to generate preview: {e}")
+
+# --- SAVE CONFIG ---
 config = {
     "timestamp": datetime.now().isoformat(),
-    "screen_layout": {
-        "total_virtual_size": total_size,
-    },
     "chart_coordinates": {
-        "CHART_X": chart_x,
-        "CHART_Y": chart_y,
-        "CHART_W": chart_w,
-        "CHART_H": chart_h,
+        "CHART_X": chart_x, "CHART_Y": chart_y, "CHART_W": chart_w, "CHART_H": chart_h,
     },
     "indicator_region": {
-        "INDICATOR_X": ind_x,
-        "INDICATOR_Y": ind_y,
-        "INDICATOR_W": ind_w,
-        "INDICATOR_H": ind_h,
+        "INDICATOR_X": ind_x, "INDICATOR_Y": ind_y, "INDICATOR_W": ind_w, "INDICATOR_H": ind_h,
     },
     "buttons": {
-        "BUY_BUTTON": list(buy_pos),
-        "SELL_BUTTON": list(sell_pos),
+        "BUY_BUTTON": list(buy_pos), "SELL_BUTTON": list(sell_pos),
     },
 }
 
-# Save as JSON
-json_filename = "chart_config.json"
-with open(json_filename, "w") as f:
+with open("chart_config.json", "w") as f:
     json.dump(config, f, indent=2)
 
-# Save as Python code
-py_filename = "chart_config.py"
-with open(py_filename, "w") as f:
-    f.write("# ========== AUTO-GENERATED CHART CONFIGURATION ==========\n")
-    f.write(f"# Generated: {datetime.now().isoformat()}\n")
-    f.write("# Copy and paste this into your forex_bot.py configuration section\n\n")
-    f.write(f"CHART_X = {chart_x}\n")
-    f.write(f"CHART_Y = {chart_y}\n")
-    f.write(f"CHART_W = {chart_w}\n")
-    f.write(f"CHART_H = {chart_h}\n\n")
-    f.write(f"# Indicator region\n")
-    f.write(f"INDICATOR_X = {ind_x}\n")
-    f.write(f"INDICATOR_Y = {ind_y}\n")
-    f.write(f"INDICATOR_W = {ind_w}\n")
-    f.write(f"INDICATOR_H = {ind_h}\n")
-    f.write(f"INDICATOR_REGION = (INDICATOR_X, INDICATOR_Y, INDICATOR_W, INDICATOR_H)\n\n")
-    f.write(f"# Button positions\n")
-    f.write(f"BUY_BUTTON = {tuple(buy_pos)}\n")
-    f.write(f"SELL_BUTTON = {tuple(sell_pos)}\n\n")
-    f.write(f"# Forex pair\n")
+with open("chart_config.py", "w") as f:
+    f.write(f"CHART_X = {chart_x}\nCHART_Y = {chart_y}\nCHART_W = {chart_w}\nCHART_H = {chart_h}\n\n")
+    f.write(f"INDICATOR_REGION = ({ind_x}, {ind_y}, {ind_w}, {ind_h})\n\n")
+    f.write(f"BUY_BUTTON = {tuple(buy_pos)}\nSELL_BUTTON = {tuple(sell_pos)}\n")
     f.write(f"FOREX_PAIR = 'EURUSD=X'\n")
 
-# Save as human-readable TXT
-txt_filename = "chart_coordinates.txt"
-with open(txt_filename, "w") as f:
-    f.write("="*80 + "\n")
-    f.write("CHART CALIBRATION RESULTS\n")
-    f.write("="*80 + "\n")
-    f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-    f.write("SCREEN LAYOUT:\n")
-    f.write(f"  Total size: {total_size}\n\n")
-    f.write("CHART COORDINATES:\n")
-    f.write(f"  CHART_X = {chart_x}\n")
-    f.write(f"  CHART_Y = {chart_y}\n")
-    f.write(f"  CHART_W = {chart_w}\n")
-    f.write(f"  CHART_H = {chart_h}\n\n")
-    f.write("INDICATOR REGION (Market Cipher dots):\n")
-    f.write(f"  INDICATOR_REGION = ({ind_x}, {ind_y}, {ind_w}, {ind_h})\n\n")
-    f.write("BUTTON POSITIONS:\n")
-    f.write(f"  BUY_BUTTON = {buy_pos}\n")
-    f.write(f"  SELL_BUTTON = {sell_pos}\n\n")
-    f.write("="*80 + "\n")
-    f.write("NEXT STEPS:\n")
-    f.write("="*80 + "\n")
-    f.write("1. Open 'chart_config.py' and copy all content\n")
-    f.write("2. Paste into forex_bot.py CONFIG section\n")
-    f.write("3. Run: python test_setup.py\n")
-    f.write("4. Verify /tmp/chart_capture_test.png shows your chart\n")
-    f.write("5. If verified, run: python forex_bot.py\n")
-
 print("\n" + "="*80)
-print("✅ CALIBRATION COMPLETE - FILES EXPORTED")
+print("✅ CALIBRATION COMPLETE")
 print("="*80)
-print()
-print(f"Files created:")
-print(f"  1. {json_filename}       - JSON format")
-print(f"  2. {py_filename}        - Python code (paste into forex_bot.py)")
-print(f"  3. {txt_filename}  - Human-readable")
-print()
-print("NEXT STEP:")
-print(f"  Open '{py_filename}' and copy all content into forex_bot.py")
-print()
+print(f"1. Check 'calibration_preview.png' to verify the regions.")
+print(f"2. Copy the content of 'chart_config.py' into 'forex_bot.py'.")
+print(f"3. Run the bot: ./bonzobot.sh forex_bot.py")
+print("="*80 + "\n")

@@ -55,24 +55,24 @@ if platform.system() == 'Linux':
         exit(1)
 
 # ========== AUTO-GENERATED CHART CONFIGURATION ==========
-# Generated: 2026-01-01T18:55:26.330669
+# Generated: 2026-01-01T19:32:34.933045
 # Copy and paste this into your forex_bot.py configuration section
 
-CHART_X = 27
-CHART_Y = 8
-CHART_W = 1301
-CHART_H = 705
+CHART_X = 30
+CHART_Y = 143
+CHART_W = 1208
+CHART_H = 827
 
 # Indicator region
-INDICATOR_X = 260
-INDICATOR_Y = 354
+INDICATOR_X = 392
+INDICATOR_Y = 522
 INDICATOR_W = 150
 INDICATOR_H = 150
 INDICATOR_REGION = (INDICATOR_X, INDICATOR_Y, INDICATOR_W, INDICATOR_H)
 
 # Button positions
-BUY_BUTTON = (1234, 321)
-SELL_BUTTON = (990, 323)
+BUY_BUTTON = (1180, 326)
+SELL_BUTTON = (995, 324)
 
 # Forex pair
 FOREX_PAIR = 'EURUSD=X'
@@ -96,6 +96,7 @@ SELL_BUTTON = (1100, 750)
 FOREX_PAIR = 'EURUSD=X'
 MIN_GREEN_AREA = 500
 MIN_RED_AREA = 500
+DEBUG_MODE = True  # Set to True to save indicator scans to /tmp/last_scan.png
 
 print(f"\nConfiguration Loaded:")
 print(f"  Chart region: ({CHART_X}, {CHART_Y}, {CHART_W}x{CHART_H})")
@@ -144,6 +145,9 @@ def detect_dots(img):
         
         red_mask = cv2.bitwise_or(red_mask1, red_mask2)
         red_area = np.sum(red_mask > 0)
+        
+        if DEBUG_MODE:
+            cv2.imwrite('/tmp/last_indicator_scan.png', img)
         
         if green_area > MIN_GREEN_AREA:
             return 'green'
@@ -277,7 +281,7 @@ def execute_trade(signal, button_pos):
         
         print(f"\n{'='*60}")
         print(f"TRADE EXECUTED: {signal.upper()} at {time.strftime('%H:%M:%S')}")
-        print(f"Clicked at ({x}, {y})")
+        print(f"Clicked at ({x}, {y}) - (COMPRA/VENDI button)")
         print(f"{'='*60}\n")
         
         return True
