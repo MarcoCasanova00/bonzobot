@@ -10,6 +10,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from PIL import Image
 import platform
+import os
 import subprocess
 import re
 
@@ -17,6 +18,12 @@ import re
 if platform.system() == 'Linux':
     # Verify Tesseract installation
     try:
+        # Check for local tessdata first
+        local_tessdata = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'local_libs/usr/share/tessdata')
+        if os.path.exists(local_tessdata):
+            os.environ['TESSDATA_PREFIX'] = local_tessdata
+            print(f"✓ Using local tessdata: {local_tessdata}")
+
         result = subprocess.run(['which', 'tesseract'], 
                               capture_output=True, text=True, timeout=5)
         tesseract_path = result.stdout.strip()
@@ -24,12 +31,18 @@ if platform.system() == 'Linux':
             pytesseract.pytesseract.tesseract_cmd = tesseract_path
             print(f"✓ Tesseract found at: {tesseract_path}")
         else:
-            print("✗ Tesseract NOT found. Run: sudo pacman -S tesseract")
-            exit(1)
+            # Try common paths if 'which' fails
+            common_paths = ['/usr/bin/tesseract', '/usr/local/bin/tesseract']
+            for p in common_paths:
+                if os.path.exists(p):
+                    pytesseract.pytesseract.tesseract_cmd = p
+                    print(f"✓ Tesseract found at: {p}")
+                    break
+            else:
+                print("✗ Tesseract NOT found. Run: sudo pacman -S tesseract")
+                # Don't exit immediately, maybe it's in the path anyway
     except Exception as e:
-        print(f"ERROR: {e}")
-        print("FIX: sudo pacman -S tesseract")
-        exit(1)
+        print(f"Note: Tesseract path detection issue: {e}")
     
     # Test screenshot permissions
     print("Testing screen capture permissions...")
@@ -41,17 +54,29 @@ if platform.system() == 'Linux':
         print("Make sure browser window is focused and visible")
         exit(1)
 
-# ============ CONFIGURATION - PASTE chart_config.py HERE ============
-# After running calibrate_chart.py, copy and paste the entire chart_config.py output below:
+# ========== AUTO-GENERATED CHART CONFIGURATION ==========
+# Generated: 2026-01-01T18:55:26.330669
+# Copy and paste this into your forex_bot.py configuration section
 
-# CHART_X = ???
-# CHART_Y = ???
-# CHART_W = ???
-# CHART_H = ???
-# INDICATOR_REGION = (???, ???, ???, ???)
-# BUY_BUTTON = (???, ???)
-# SELL_BUTTON = (???, ???)
-# FOREX_PAIR = 'EURUSD=X'
+CHART_X = 27
+CHART_Y = 8
+CHART_W = 1301
+CHART_H = 705
+
+# Indicator region
+INDICATOR_X = 260
+INDICATOR_Y = 354
+INDICATOR_W = 150
+INDICATOR_H = 150
+INDICATOR_REGION = (INDICATOR_X, INDICATOR_Y, INDICATOR_W, INDICATOR_H)
+
+# Button positions
+BUY_BUTTON = (1234, 321)
+SELL_BUTTON = (990, 323)
+
+# Forex pair
+FOREX_PAIR = 'EURUSD=X'
+
 
 # ============ FALLBACK CONFIGURATION (if calibration not run yet) ============
 CHART_X = 100
@@ -273,6 +298,17 @@ def main():
     print(f"Platform: {platform.system()}")
     print(f"Failsafe: Press Ctrl+C to STOP")
     print("="*60)
+    
+    # Market Holiday Check
+    now = datetime.now()
+    if now.month == 1 and now.day == 1:
+        print("⚠️ WARNING: Today is January 1st (New Year's Day).")
+        print("   Forex markets are CLOSED. The bot will not find any new signals.")
+        print("   Price action on your chart is likely frozen.\n")
+    elif now.weekday() >= 5: # Saturday or Sunday
+        print("⚠️ WARNING: It is the weekend.")
+        print("   Forex markets are CLOSED. The bot will not find any new signals.\n")
+
     print("Starting in 5 seconds...\n")
     time.sleep(5)
     
@@ -296,6 +332,8 @@ def main():
             
             if signal:
                 print(f"[{time.strftime('%H:%M:%S')}] Signal: {signal} | Divergence: {div_found} | Zone: {zone_found}")
+            else:
+                print(f"[{time.strftime('%H:%M:%S')}] Scanning... (No signal detected)")
             
             current_time = time.time()
             if (signal and div_found and zone_found and 

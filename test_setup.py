@@ -68,10 +68,10 @@ except Exception as e:
 print("\nTest 6: TA-Lib indicators...")
 try:
     import talib as ta
-    close = np.array([100, 101, 102, 101, 100])
-    high = close + 1
-    low = close - 1
-    vol = np.array([1000000]*5)
+    close = np.array([100.0, 101.0, 102.0, 101.0, 100.0], dtype='float64')
+    high = (close + 1.0).astype('float64')
+    low = (close - 1.0).astype('float64')
+    vol = np.array([1000000.0]*5, dtype='float64')
     mfi = ta.MFI(high, low, close, vol, 14)
     print(f"  ✓ TA-Lib working (MFI: {mfi[-1]:.2f})")
 except Exception as e:

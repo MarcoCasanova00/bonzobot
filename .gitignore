@@ -1,0 +1,38 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.DS_Store
+.env
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.pytest_cache/
+
+# Generated config files (optional - keep for tracking)
+# chart_config.json
+# chart_config.py
+# chart_coordinates.txt
+
+# Logs
+*.log
+bot.log
+
+# Temp files
+/tmp/
+*.tmp
+local_libs/
+*.tar.zst
+dummy_tk/
+chart_config.json
+chart_config.py
+chart_coordinates.txt
